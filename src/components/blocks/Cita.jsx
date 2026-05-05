@@ -31,7 +31,9 @@ const Cita = () => {
                     Escríbenos por <span className="font-bold">Whastapp</span>
                   </h3>
                   <Boton border="none" textSize="text-[11px] lg:text-[18px]" textColor="text-rojo" fontWeight="font-normal" bg="bg-beige" px="px-4 lg:px-4" py="py-1" className=" relative overflow-hidden hover:bg-rojo hover:text-white hover:border-rojo ease-in-out m-0">
-                    <span className=" z-10 transition-colors duration-200">Contactar</span>
+                    <a href="https://wa.me/51999999999"   target="_blank"  rel="noopener noreferrer">
+                      <span className=" z-10 transition-colors duration-200">Contactar</span>
+                    </a>
                   </Boton>
               </div>
             </div>

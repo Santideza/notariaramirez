@@ -10,88 +10,142 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-app.post('/send-email', async (req, res) => {
-  try {
-    const { nombres, apellidos, email, telefono, servicio, consulta } = req.body
+const getMissingMailConfig = () => {
+  const requiredConfig = [
+    'SMTP_USER',
+    'SMTP_PASS',
+    'MAIL_TO'
+  ]
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
+  if (!process.env.SMTP_SERVICE) {
+    requiredConfig.push('SMTP_HOST', 'SMTP_PORT')
+  }
+
+  return requiredConfig.filter((key) => !process.env[key])
+}
+
+const getTransporter = () => {
+  if (process.env.SMTP_SERVICE && !process.env.SMTP_HOST) {
+    return nodemailer.createTransport({
+      service: process.env.SMTP_SERVICE,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS
       }
     })
+  }
 
-    await transporter.sendMail({
-      from: `"${nombres} ${apellidos}" <${email}>`,
-      to: process.env.EMAIL_USER,
-      subject: 'Nueva consulta desde la web',
-      html: `
-    <div style="background-color: #ffffff; padding: 40px 20px; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
-      <div style="max-width: 600px; margin: 0 auto;">
-        
-        <!-- Encabezado Estilo Minimal -->
-        <div style="margin-bottom: 30px; text-align: left;">
-          <h2 style="color: #1a1a1a; margin: 0; font-size: 28px; font-weight: 700;">Nueva consulta recibida</h2>
-          <p style="color: #666; margin-top: 10px; font-size: 16px;">Aquí tienes los detalles del formulario de contacto.</p>
-        </div>
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: process.env.SMTP_SECURE === 'true',
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS
+    }
+  })
+}
 
-        <!-- Tarjeta Principal (Basada en la imagen) -->
-        <div style="background-color: #ffead9; border-radius: 32px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-          
-          <p style="color: #7c0600; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; margin-bottom: 15px;">
-            Resumen de la consulta
-          </p>
+const escapeHtml = (value = '') => {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;')
+}
 
-          <h3 style="color: #1a1a1a; font-size: 22px; margin: 0 0 5px 0;">${nombres} ${apellidos}</h3>
-          <p style="color: #555; font-size: 16px; margin: 0 0 30px 0;">${servicio}</p>
+const buildReclamoEmail = (data) => {
+  const { nombres, apellidos, email, telefono, tipoDocumento, numeroDocumento, direccion, tipoReclamo, detalleReclamo, pedidoConsumidor } = data
 
-          <!-- Tabla de Datos -->
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
-            <tr>
-              <td style="padding: 12px 0; border-bottom: 1px solid rgba(124, 6, 0, 0.1); color: #666; font-size: 15px;">Email</td>
-              <td style="padding: 12px 0; border-bottom: 1px solid rgba(124, 6, 0, 0.1); color: #1a1a1a; text-align: right; font-weight: 500;">${email}</td>
-            </tr>
-            <tr>
-              <td style="padding: 12px 0; border-bottom: 1px solid rgba(124, 6, 0, 0.1); color: #666; font-size: 15px;">Teléfono</td>
-              <td style="padding: 12px 0; border-bottom: 1px solid rgba(124, 6, 0, 0.1); color: #1a1a1a; text-align: right; font-weight: 500;">${telefono}</td>
-            </tr>
-          </table>
+  return {
+    subject: `Nuevo ${tipoReclamo || 'reclamo'} - Libro de Reclamaciones`,
+    html: `
+      <div style="background-color: #ffffff; padding: 40px 20px; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+        <div style="max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #1a1a1a; margin: 0; font-size: 28px; font-weight: 700;">Nuevo ${escapeHtml(tipoReclamo || 'reclamo')}</h2>
+          <p style="color: #666; margin-top: 10px; font-size: 16px;">Libro de Reclamaciones - Notaria Ramirez</p>
 
-          <!-- Sección de Mensaje / Consulta -->
-          <div style="margin-top: 10px;">
-            <p style="color: #666; font-size: 14px; margin-bottom: 8px;">Mensaje:</p>
-            <div style="font-size: 16px; color: #1a1a1a; line-height: 1.6; font-weight: 400;">
-              ${consulta}
-            </div>
+          <div style="background-color: #f5f5f5; border-left: 4px solid #bd1714; border-radius: 8px; padding: 25px; margin: 25px 0 20px;">
+            <h3 style="color: #1a1a1a; font-size: 20px; margin: 0 0 20px;">Datos del Consumidor</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr><td style="padding: 10px 0; color: #666; font-size: 14px; width: 50%;">Nombres</td><td style="padding: 10px 0; color: #1a1a1a; font-weight: 500;">${escapeHtml(nombres)}</td></tr>
+              <tr><td style="padding: 10px 0; color: #666; font-size: 14px;">Apellidos</td><td style="padding: 10px 0; color: #1a1a1a; font-weight: 500;">${escapeHtml(apellidos)}</td></tr>
+              <tr><td style="padding: 10px 0; color: #666; font-size: 14px;">Tipo de Documento</td><td style="padding: 10px 0; color: #1a1a1a; font-weight: 500;">${escapeHtml(tipoDocumento)} - ${escapeHtml(numeroDocumento)}</td></tr>
+              <tr><td style="padding: 10px 0; color: #666; font-size: 14px;">Direccion</td><td style="padding: 10px 0; color: #1a1a1a; font-weight: 500;">${escapeHtml(direccion)}</td></tr>
+              <tr><td style="padding: 10px 0; color: #666; font-size: 14px;">Email</td><td style="padding: 10px 0; color: #1a1a1a; font-weight: 500;">${escapeHtml(email)}</td></tr>
+              <tr><td style="padding: 10px 0; color: #666; font-size: 14px;">Telefono</td><td style="padding: 10px 0; color: #1a1a1a; font-weight: 500;">${escapeHtml(telefono)}</td></tr>
+            </table>
           </div>
 
-          <!-- Botón de Acción Estilo Moderno -->
-          <div style="margin-top: 40px; text-align: center;">
-            <a href="mailto:${email}" style="background-color: #7c0600; color: #ffffff; padding: 15px 35px; border-radius: 12px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 16px;">
-              Responder ahora
-            </a>
+          <div style="background-color: #f5f5f5; border-left: 4px solid #bd1714; border-radius: 8px; padding: 25px; margin-bottom: 20px;">
+            <h3 style="color: #1a1a1a; font-size: 18px; margin: 0 0 15px;">Detalle del reclamo</h3>
+            <p style="color: #1a1a1a; font-size: 15px; line-height: 1.6; margin: 0;">${escapeHtml(detalleReclamo)}</p>
           </div>
 
-        </div>
-
-        <!-- Pie de página -->
-        <div style="margin-top: 30px; text-align: center; color: #999; font-size: 12px;">
-          Enviado desde el sistema de gestión web.
+          <div style="background-color: #f5f5f5; border-left: 4px solid #bd1714; border-radius: 8px; padding: 25px;">
+            <h3 style="color: #1a1a1a; font-size: 18px; margin: 0 0 15px;">Pedido del Consumidor</h3>
+            <p style="color: #1a1a1a; font-size: 15px; line-height: 1.6; margin: 0;">${escapeHtml(pedidoConsumidor)}</p>
+          </div>
         </div>
       </div>
-    </div>
-  `
+    `
+  }
+}
+
+const buildConsultaEmail = (data) => {
+  const { nombres, apellidos, email, telefono, servicio, consulta } = data
+
+  return {
+    subject: `Nueva consulta web - ${servicio || 'Servicio no especificado'}`,
+    html: `
+      <div style="background-color: #ffffff; padding: 40px 20px; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+        <div style="max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #1a1a1a; margin: 0 0 10px; font-size: 28px; font-weight: 700;">Nueva consulta web</h2>
+          <p style="color: #666; margin: 0 0 25px; font-size: 16px;">Formulario de contacto - Notaria Ramirez</p>
+
+          <div style="background-color: #f5f5f5; border-left: 4px solid #bd1714; border-radius: 8px; padding: 25px; margin-bottom: 20px;">
+            <p><strong>Nombres:</strong> ${escapeHtml(nombres)}</p>
+            <p><strong>Apellidos:</strong> ${escapeHtml(apellidos)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+            <p><strong>Telefono:</strong> ${escapeHtml(telefono)}</p>
+            <p><strong>Servicio:</strong> ${escapeHtml(servicio)}</p>
+          </div>
+
+          <div style="background-color: #f5f5f5; border-left: 4px solid #bd1714; border-radius: 8px; padding: 25px;">
+            <h3 style="color: #1a1a1a; font-size: 18px; margin: 0 0 15px;">Consulta</h3>
+            <p style="color: #1a1a1a; font-size: 15px; line-height: 1.6; margin: 0;">${escapeHtml(consulta)}</p>
+          </div>
+        </div>
+      </div>
+    `
+  }
+}
+
+app.post('/send-email', async (req, res) => {
+  try {
+    const missingConfig = getMissingMailConfig()
+
+    if (missingConfig.length > 0) {
+      return res.status(500).json({ message: 'Faltan variables de entorno para enviar el correo' })
+    }
+
+    const { email, tipoReclamo } = req.body
+    const mailContent = tipoReclamo ? buildReclamoEmail(req.body) : buildConsultaEmail(req.body)
+    const transporter = getTransporter()
+
+    await transporter.sendMail({
+      from: process.env.MAIL_FROM || `"Notaria Ramirez" <${process.env.SMTP_USER}>`,
+      to: process.env.MAIL_TO,
+      replyTo: email,
+      subject: mailContent.subject,
+      html: mailContent.html
     })
 
-    res.status(200).json({ message: 'Correo enviado correctamente' })
-
+    res.status(200).json({ message: tipoReclamo ? 'Reclamo enviado correctamente' : 'Consulta enviada correctamente' })
   } catch (error) {
     console.error(error)
-    console.log(process.env.EMAIL_USER)
-    console.log(process.env.EMAIL_PASS)
-    res.status(500).json({ message: 'Error al enviar correo' })
-
+    res.status(500).json({ message: 'Error al enviar el correo' })
   }
 })
 

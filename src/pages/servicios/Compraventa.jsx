@@ -1,12 +1,8 @@
 import React from 'react'
-import Navbar from '../../components/layout/Navbar'
-import Footer from '../../components/layout/Footer'
 import Hero from "../../components/blocks/Hero"
-import Cita from '../../components/blocks/Cita'
 import { service } from "../../data/Servicios.js";
 import Container from '../../components/layout/Container.jsx'
 import { useParams } from 'react-router-dom'
-import BotonWhatsApp from '../../components/ui/BotonWhatsApp.jsx'
 
 const Compraventa = () => {
 
@@ -15,8 +11,6 @@ const Compraventa = () => {
 
   return (
     <>
-        <Navbar></Navbar>
-
         <Hero image={servicio.imagen}>
           <div className='flex flex-col items-center gap-4 smd:gap-7 md:gap-14'>
             <img 
@@ -33,10 +27,10 @@ const Compraventa = () => {
         </Hero>
 
         <div className='w-full pt-10 md:pt-18'> 
-          <Container><h2 className='title text-center text-black leading-7 md:leading-12 mb-7 sm:mb-10 md:mb-13'>¿Cuáles son los requisitos?</h2></Container>
+          <Container><h2 className='title text-center text-black leading-7 md:leading-12 mb-7 '>Requisitos</h2></Container>
         </div>
 
-        <div className='w-full pt-0 md:pt-10'> 
+        <div className='w-full pt-0 md:pt-10 pb-10'>  
           <Container>
             <div className='flex flex-col gap-3 md:gap-6'>
               {servicio.requisitos.map((item, i) => (
@@ -50,10 +44,6 @@ const Compraventa = () => {
             </div> 
           </Container>
         </div> 
-
-        <Cita></Cita>
-        <Footer></Footer>
-        <BotonWhatsApp />
     </>
   )
 }

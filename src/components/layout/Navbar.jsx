@@ -9,10 +9,10 @@ const Navbar = () => {
 
   return (
     <>
-        <nav className='w-full fixed z-100 h-[110px] smd:h-[150px] 2xl:h-[190px] bg-gradient-to-r from-[#7C0600] to-[#1a0100]'>
+        <nav className='w-full fixed z-100 h-[110px] smd:h-[150px] 3xl:h-[190px] bg-gradient-to-r from-[#7C0600] to-[#1a0100]'>
             <div className="screen m-auto flex items-center justify-evenly h-full">
                 <Link to="/" className="flex items-center mx-auto lg:mx-0">
-                    <div className="w-[130px] smd:w-[200px] 2xl:w-[260px]">
+                    <div className="w-[130px] smd:w-[200px] 3xl:w-[260px]">
                         <Logo className="w-full h-auto" />
                     </div>
                 </Link>
@@ -57,7 +57,7 @@ const Navbar = () => {
             </div>
         </nav>
 
-        <div className="h-[110px] smd:h-[150px] 2xl:h-[190px]"></div> 
+        <div className="h-[110px] smd:h-[150px] 3xl:h-[190px]"></div> 
     </>
   )
 }

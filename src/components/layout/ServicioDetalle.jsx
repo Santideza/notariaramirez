@@ -1,21 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useParams } from "react-router-dom";
 import { service } from "../../data/Servicios.js";
-import Navbar from './Navbar.jsx';
-import Footer from './Footer.jsx';
 import Cita from '../blocks/Cita.jsx';
 import Hero from '../blocks/Hero.jsx';
 import Container from './Container.jsx';
 
 const ServicioDetalle = () => {
-  const { servicio } = useParams();
-  const data = service.find(item => item.slug === servicio);
+  const { slug } = useParams();
+  const data = service.find(item => item.slug === slug);
   const [abierto, setAbierto] = useState(null);
 
-  if (!data) return <h1>No encontrado</h1>;
+  if (!data) return <h1 className="py-16 text-center text-2xl font-semibold">Servicio no encontrado</h1>;
+
   return (
     <>
-      <Navbar></Navbar>
       <Hero image={data.imagen}>
         <div className='flex flex-col items-center gap-4 smd:gap-7 md:gap-14'>
           <img src={data.icono} alt={data.titulo} className="w-[72px] h-[56px] md:w-[123px] md:h-[96px] object-contain"/>
@@ -52,7 +50,7 @@ const ServicioDetalle = () => {
       )}
 
       {data.secciones && (
-        <div className='w-full pt-0 md:pt-10'> 
+        <div className='w-full pt-0 md:pt-10 pb-10'>  
           <Container>
             <div className="w-full flex flex-col gap-0 sm:gap-1">
               {data.secciones.map((item, i) => (
@@ -80,7 +78,6 @@ const ServicioDetalle = () => {
         </div> 
       )}
       <Cita></Cita>
-      <Footer></Footer>
     </>
   )
 }

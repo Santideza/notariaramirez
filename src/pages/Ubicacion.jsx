@@ -1,17 +1,11 @@
 import React from 'react'
 import Container from '../components/layout/Container'
-import Navbar from '../components/layout/Navbar'
-import Footer from '../components/layout/Footer'
-import Cita from '../components/blocks/Cita'
 import Hero from '../components/blocks/Hero'
 import imgUbicacion from "../assets/images/imgUbicacion.jpg"
-import BotonWhatsApp from '../components/ui/BotonWhatsApp'
 
 const Ubicacion = () => {
   return (
     <>
-      <Navbar></Navbar>
-
       <div className="block md:hidden">
         <Hero image={imgUbicacion}>
           <h2 className="font-[Choplin] font-light text-[21px] sm:text-3xl md:text-5xl lg:text-[62px] leading-5 smd:leading-6 smd:leading-none  mb-3 sm:mb-5 md:mb-8">
@@ -38,10 +32,6 @@ const Ubicacion = () => {
             loading="lazy"
           ></iframe>
       </div>
-      
-      <Cita></Cita>
-      <Footer></Footer>
-      <BotonWhatsApp />
     </>
   )
 }

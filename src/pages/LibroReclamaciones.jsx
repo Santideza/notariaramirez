@@ -1,20 +1,47 @@
 import { useState } from "react";
-import Navbar from "../components/layout/Navbar";
-import Footer from "../components/layout/Footer";
 import Boton from "../components/ui/Boton";
 
 export default function LibroReclamaciones() {
-  const [enviado, setEnviado] = useState(false);
+  const [enviado, setEnviado] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setEnviado(true);
-    e.target.reset();
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    setEnviado(false)
+
+    const formData = new FormData(e.target)
+    const data = Object.fromEntries(formData.entries())
+
+    try {
+      const res = await fetch('http://localhost:3001/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
+      if (!res.ok) {
+        throw new Error('Error en el servidor')
+      }
+
+      const result = await res.json()
+
+      alert(result.message || 'Enviado correctamente ✅')
+      setEnviado(true)
+      e.target.reset()
+
+    } catch (error) {
+      console.error(error)
+      alert('Error al enviar ❌')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <>
-      <Navbar />
 
       <div className="bg-gradient-to-br from-gray-100 via-gray-100 to-gray-200 min-h-screen py-8 sm:py-10 md:py-12 px-3 sm:px-4 md:px-6">
         <div className="w-full max-w-4xl mx-auto bg-white shadow-xl rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 transition-all duration-500 hover:shadow-2xl">
@@ -48,26 +75,27 @@ export default function LibroReclamaciones() {
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                <input type="text" placeholder="Nombres" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
+                <input type="text" name="nombres" placeholder="Nombres" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
 
-                <input type="text" placeholder="Apellidos" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
+                <input type="text" name="apellidos" placeholder="Apellidos" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-3 sm:mt-4">
-                <select className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition">
+                <select name="tipoDocumento" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition">
+                  <option value="">Tipo de documento</option>
                   <option>DNI</option>
                   <option>CE</option>
                   <option>Pasaporte</option>
                 </select>
 
-                <input type="text" placeholder="Número de documento" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
+                <input type="text" name="numeroDocumento" placeholder="Número de documento" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
               </div>
 
-              <input type="text" placeholder="Dirección" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg mt-3 sm:mt-4 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
+              <input type="text" name="direccion" placeholder="Dirección" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg mt-3 sm:mt-4 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
 
-              <input type="email" placeholder="Correo electrónico" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg mt-3 sm:mt-4 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
+              <input type="email" name="email" placeholder="Correo electrónico" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg mt-3 sm:mt-4 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
 
-              <input type="text" placeholder="Teléfono" className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg mt-3 sm:mt-4 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
+              <input type="text" name="telefono" placeholder="Teléfono" className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg mt-3 sm:mt-4 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition"/>
             </div>
 
             <div>
@@ -75,12 +103,13 @@ export default function LibroReclamaciones() {
                 2. Detalle del reclamo
               </h2>
 
-              <select className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition">
+              <select name="tipoReclamo" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition">
+                <option value="">Selecciona tipo de reclamo</option>
                 <option>Reclamo (producto/servicio)</option>
                 <option>Queja (malestar)</option>
               </select>
 
-              <textarea placeholder="Describe el problema (máx. 1000 caracteres)" maxLength="1000" className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg h-28 sm:h-32 mt-3 sm:mt-4 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition resize-none" />
+              <textarea name="detalleReclamo" placeholder="Describe el problema (máx. 1000 caracteres)" maxLength="1000" className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg h-28 sm:h-32 mt-3 sm:mt-4 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition resize-none" />
             </div>
 
             <div>
@@ -88,18 +117,27 @@ export default function LibroReclamaciones() {
                 3. Pedido del consumidor
               </h2>
 
-              <textarea placeholder="¿Qué solución esperas?" className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg h-20 sm:h-24 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition resize-none"
+              <textarea name="pedidoConsumidor" placeholder="¿Qué solución esperas?" required className="w-full p-2 sm:p-3 border border-gris-claro rounded-lg h-20 sm:h-24 focus:ring-1 focus:ring-red-500/60 focus:border-rojo outline-none transition resize-none"
               />
             </div>
 
             <div className="flex items-start gap-2 text-xs sm:text-sm text-gray-700">
-              <input type="checkbox" required className="accent-rojo scale-110 mt-1"/>
+              <input type="checkbox" name="aceptarTratamiento" required className="accent-rojo scale-110 mt-1"/>
               <label>
                 Acepto el tratamiento de mis datos personales
               </label>
             </div>
 
-            <Boton type="submit" texto="Enviar Reclamo" bg="bg-rojo" textColor="text-white" border="border border-[rgb(189,23,20)]" fontWeight="font-semibold" rounded="rounded-xl" className="w-full hover:bg-rojo hover:border-rojo transform hover:scale-[1.02] active:scale-95 shadow-md"/>
+            <Boton
+              type="submit"
+              texto={loading ? "Enviando..." : "Enviar Reclamo"}
+              bg="bg-rojo"
+              textColor="text-white"
+              border="border border-[rgb(189,23,20)]"
+              fontWeight="font-semibold"
+              rounded="rounded-xl"
+              className="w-full hover:bg-rojo hover:border-rojo transform hover:scale-[1.02] active:scale-95 shadow-md"
+            />
           </form>
 
           {enviado && (
@@ -112,8 +150,6 @@ export default function LibroReclamaciones() {
 
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }

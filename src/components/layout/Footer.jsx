@@ -52,9 +52,6 @@ const Footer = () => {
 
             <div className="flex flex-col items-center text-center lg:text-start w-56.25 divide-y divide-gris">
               <h2 className="font-bold text-gris-oscuro text-[14px] py-2 w-full">Legal</h2>
-              <Link to="#"  onClick={(e) => e.preventDefault()} className="text-gris text-[14px] font-light py-2 w-full">
-                Términos y condiciones
-              </Link>
               <Link to="/libro-reclamaciones" className="text-gris text-[14px] font-light py-2 w-full">
                 Libro de reclamaciones
               </Link>
