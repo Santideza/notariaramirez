@@ -27,7 +27,10 @@ const Formulario = () => {
         const result = await res.json()
 
         alert(result.message)
-        e.target.reset()
+
+        if (res.ok) {
+            e.target.reset()
+        }
 
         } catch (error) {
         alert('Error al enviar ❌')
