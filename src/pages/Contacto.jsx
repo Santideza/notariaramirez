@@ -5,7 +5,19 @@ import imgContacto from "../assets/images/imgContacto.jpg"
 import iconoMensaje from "../assets/icons/iconoMensaje.svg"
 import iconoWhastapp from "../assets/icons/iconoWhastapp.svg"
 import Hero from '../components/blocks/Hero'
-import Formulario from '../components/blocks/Formulario'
+
+const whatsappHref = (number) => `https://wa.me/${number.replace(/\D/g, '')}`
+
+const WhatsAppLink = ({ children, number }) => (
+  <a
+    href={whatsappHref(number)}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:underline"
+  >
+    {children}
+  </a>
+)
 
 const Contacto = () => {
   return (
@@ -33,10 +45,12 @@ const Contacto = () => {
             <h2 className='text-[13px] smd:text-[23px] lg:text-[40px] font-semibold text-center md:text-start font-[Choplin]'>Central Telefónica</h2>
             <div className='mt-5 md:mt-8'>
               <h3 className='text-rojo text-[12px] smd:text-[20px] lg:text-[30px] font-light flex gap-2 lg:gap-7'>
-                <img src={iconoLlamada} alt="icono llamada" className="w-3 md:w-[35px]" />(01) 222-6281
+                <img src={iconoLlamada} alt="icono llamada" className="w-3 md:w-[35px]" />
+                <WhatsAppLink number="5112226281">(01) 222-6281</WhatsAppLink>
               </h3>
               <h3 className='text-rojo text-[12px] smd:text-[20px] lg:text-[30px] font-light flex gap-2 lg:gap-7'>
-                <img src={iconoLlamada} alt="icono llamada" className="w-3 md:w-[35px]" />(01) 256-5990
+                <img src={iconoLlamada} alt="icono llamada" className="w-3 md:w-[35px]" />
+                <WhatsAppLink number="5112565990">(01) 256-5990</WhatsAppLink>
               </h3>
               <ul className='font-light text-[9px] smd:text-[18px] lg:text-[25px]'>
                 <li>Lunes a Viernes de 9:00 am a 6:00 pm</li>
@@ -55,7 +69,8 @@ const Contacto = () => {
                 <p className='text-[12px] smd:text-[18px] lg:text-[35px] font-light text-rojo'>Abogada</p>
                 <div className='flex flex-col mt-2 gap-0 smd:gap-1'>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
-                    <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />+51 980 727 180
+                    <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
+                    <WhatsAppLink number="+51 980 727 180">+51 980 727 180</WhatsAppLink>
                   </h3>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center  gap-1 smd:gap-3'>
                     <img src={iconoLlamada} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />Anexo: 112
@@ -71,7 +86,7 @@ const Contacto = () => {
                 <div className='flex flex-col mt-2 gap-0 smd:gap-1'>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
-                    +51 986 268 501
+                    <WhatsAppLink number="+51 986 268 501">+51 986 268 501</WhatsAppLink>
                   </h3>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoLlamada} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
@@ -90,7 +105,7 @@ const Contacto = () => {
                 <div className='flex flex-col mt-2 gap-0 smd:gap-1'>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
-                    +51 986 268 501
+                    <WhatsAppLink number="+51 986 268 501">+51 986 268 501</WhatsAppLink>
                   </h3>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoLlamada} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
@@ -109,7 +124,7 @@ const Contacto = () => {
                 <div className='flex flex-col mt-2 gap-0 smd:gap-1'>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
-                    +51 986 268 501
+                    <WhatsAppLink number="+51 986 268 501">+51 986 268 501</WhatsAppLink>
                   </h3>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoLlamada} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
@@ -135,7 +150,7 @@ const Contacto = () => {
                 <div className='flex flex-col mt-2 gap-0 smd:gap-1'>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
-                    +51 989 408 337
+                    <WhatsAppLink number="+51 989 408 337">+51 989 408 337</WhatsAppLink>
                   </h3>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoLlamada} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
@@ -165,7 +180,7 @@ const Contacto = () => {
                 <div className='flex flex-col mt-2 gap-0 smd:gap-1'>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
-                    +51 989 408 337
+                    <WhatsAppLink number="+51 989 408 337">+51 989 408 337</WhatsAppLink>
                   </h3>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoLlamada} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
@@ -186,7 +201,7 @@ const Contacto = () => {
               <div className='flex flex-col mt-2 gap-0 smd:gap-1'>
                 <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                   <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
-                  +51 989 408 293
+                  <WhatsAppLink number="+51 989 408 293">+51 989 408 293</WhatsAppLink>
                 </h3>
 
                 <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
@@ -214,7 +229,7 @@ const Contacto = () => {
                 <div className='flex flex-col mt-2 md:mt-5 gap-0 smd:gap-1'>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
-                    +51 986 007 121
+                    <WhatsAppLink number="+51 986 007 121">+51 986 007 121</WhatsAppLink>
                   </h3>
 
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
@@ -237,7 +252,7 @@ const Contacto = () => {
                 <div className='flex flex-col mt-2 md:mt-5 gap-0 smd:gap-1'>
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
                     <img src={iconoWhastapp} alt="icono llamada" className="w-[14px] smd:w-[20px] lg:w-[29px]" />
-                    +51 982 528 958
+                    <WhatsAppLink number="+51 982 528 958">+51 982 528 958</WhatsAppLink>
                   </h3>
 
                   <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex items-center gap-1 smd:gap-3'>
@@ -267,8 +282,6 @@ const Contacto = () => {
           </div>
           </Container>
         </div>
-      
-      <Formulario></Formulario>
       
       <div className="flex justify-center">
           <iframe

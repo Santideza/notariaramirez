@@ -26,9 +26,8 @@ export default function LibroReclamaciones() {
         throw new Error('Error en el servidor')
       }
 
-      const result = await res.json()
+      await res.json()
 
-      alert(result.message || 'Enviado correctamente ✅')
       setEnviado(true)
       e.target.reset()
 
@@ -141,10 +140,28 @@ export default function LibroReclamaciones() {
           </form>
 
           {enviado && (
-            <div className="mt-5 sm:mt-6 text-center">
-              <p className="text-green-600 font-semibold text-sm sm:text-lg">
-                ✔ Reclamo enviado correctamente
-              </p>
+            <div className="fixed left-0 right-0 top-5 z-50 flex justify-center px-4">
+              <div className="relative flex w-full max-w-md items-center gap-3 rounded-xl border border-green-200 bg-white px-5 py-4 pr-12 shadow-2xl">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-100 text-lg font-bold text-green-700">
+                  ✓
+                </div>
+                <div className="text-left">
+                  <p className="text-base font-semibold text-gray-900">
+                    Correo enviado
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Tu reclamo fue enviado correctamente.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setEnviado(false)}
+                  aria-label="Cerrar mensaje"
+                  className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition hover:bg-gray-100 hover:text-gray-700"
+                >
+                  x
+                </button>
+              </div>
             </div>
           )}
 
