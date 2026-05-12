@@ -41,16 +41,16 @@ const Navbar = () => {
                 </div>
 
                 <div className={`lg:hidden fixed top-0 right-0 w-[80%] max-w-[300px] h-screen bg-gradient-to-r from-[#7C0600] to-[#1a0100] flex flex-col items-center justify-center gap-8 z-40 shadow-2xl transition-all duration-500 ease-in-out ${isOpen ? "translate-x-0 opacity-100 pointer-events-auto" : "translate-x-full opacity-0 pointer-events-none"}`} >
-                    <Link to="/nosotros" className="text-white font-choplin text-[18px] 2xl:text-[20px] hover:text-amarillo transition-transform duration-300">
+                    <Link to="/nosotros" onClick={() => setIsOpen(false)} className="text-white font-choplin text-[18px] 2xl:text-[20px] hover:text-amarillo transition-transform duration-300">
                         La Notaría
                     </Link>
-                    <Link to="/servicios" className="text-white font-choplin text-[18px] 2xl:text-[20px] hover:text-amarillo transition-transform duration-300" >
+                    <Link to="/servicios" onClick={() => setIsOpen(false)} className="text-white font-choplin text-[18px] 2xl:text-[20px] hover:text-amarillo transition-transform duration-300" >
                         Servicios
                     </Link>
-                    <Link to="/ubicanos" className="text-white font-choplin text-[18px] 2xl:text-[20px] hover:text-amarillo transition-transform duration-300">
+                    <Link to="/ubicanos" onClick={() => setIsOpen(false)} className="text-white font-choplin text-[18px] 2xl:text-[20px] hover:text-amarillo transition-transform duration-300">
                         Ubícanos
                     </Link>
-                    <Link to="/contacto">
+                    <Link to="/contacto" onClick={() => setIsOpen(false)}>
                         <Boton width="w-[125px] 2xl:w-[150px]" height="h-[35px] 2xl:h-[40px]" textSize="text-[15px] 2xl:text-[18px]" className="hover:bg-rojo hover:text-white hover:border-rojo ease-in-out" />
                     </Link>
                 </div>

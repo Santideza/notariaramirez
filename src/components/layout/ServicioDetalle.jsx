@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useParams } from "react-router-dom";
 import { service } from "../../data/Servicios.js";
-import Cita from '../blocks/Cita.jsx';
 import Hero from '../blocks/Hero.jsx';
 import Container from './Container.jsx';
 
@@ -79,7 +78,6 @@ const ServicioDetalle = () => {
           </Container>
         </div> 
       )}
-      <Cita></Cita>
     </>
   )
 }
