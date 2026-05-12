@@ -1,8 +1,7 @@
-import Whatsapp from "../../assets/icons/Whastapp"
-import whatsappIcon from "../../assets/icons/WhatsappContacto.svg"
 import imgPlanear from "../../assets/images/imgPlanear.jpg"
 import Container from "../layout/Container"
 import Boton from "../ui/Boton"
+import { Link } from "react-router-dom"
 
 const Cita = () => {
   return (
@@ -19,21 +18,14 @@ const Cita = () => {
               <img src={imgPlanear} alt="Persona Natural" className="h-full w-full object-cover object-top"/>
             </div>
             <div className="h-[114px] smd:h-[120px] lg:h-[190px] w-full bg-gradient-to-r from-[#7C0600] to-[#000000]">
-              <div className="w-full h-full gap-2 lg:gap-6 flex flex-col text-center justify-center items-center relative">
-                <div className="absolute flex justify-center items-center -top-7 lg:-top-12 left-1/2 -translate-x-1/2  w-[50px] h-[50px] lg:w-24 lg:h-24 rounded-full bg-rojo">
-                  <img
-                      className="w-11 h-11 sm:w-20 sm:h-20 animate-pulseScale"
-                      src={whatsappIcon}
-                      alt="WhatsApp"
-                    />
-                </div>
+              <div className="w-full h-full gap-2 lg:gap-6 flex flex-col text-center justify-center items-center">
                   <h3 className="mt-0 lg:mt-5 text-[17px] xl:text-[40px] lg:text-3xl text-white font-light">
-                    Escríbenos por <span className="font-bold">Whastapp</span>
+                    Contáctanos
                   </h3>
                   <Boton border="none" textSize="text-[11px] lg:text-[18px]" textColor="text-rojo" fontWeight="font-normal" bg="bg-beige" px="px-4 lg:px-4" py="py-1" className=" relative overflow-hidden hover:bg-rojo hover:text-white hover:border-rojo ease-in-out m-0">
-                    <a href="https://wa.me/51999999999"   target="_blank"  rel="noopener noreferrer">
+                    <Link to="/contacto">
                       <span className=" z-10 transition-colors duration-200">Contactar</span>
-                    </a>
+                    </Link>
                   </Boton>
               </div>
             </div>

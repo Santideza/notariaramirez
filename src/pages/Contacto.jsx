@@ -274,7 +274,6 @@ const Contacto = () => {
           <div>
             <h2 className='text-[13px] smd:text-[23px] lg:text-[40px] font-semibold text-center md:text-start font-[Choplin]'>Administración</h2>
             <div className='mt-2 md:mt-8'>
-              <h2 className='text-[12px] smd:text-[25px] lg:text-[35px] font-bold text-rojo '>Roger Herrera</h2>
               <h3 className='text-[11px] smd:text-[13px] lg:text-[25px] font-light flex gap-1 smd:gap-3 mt-2'>
                 <img src={iconoLlamada} alt="icono llamada" className="w-[14px] md:w-[20px] lg:w-[29px]" />Anexo: 105
               </h3>

@@ -331,7 +331,7 @@ export const service = [
   },
   {
     slug: "autorizacion",
-    titulo: "Autorización",
+    titulo: "Autorización de viaje",
     icono: autorizacion,
     imagen: imgAutorizacion,
     secciones:[
