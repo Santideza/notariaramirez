@@ -4,12 +4,52 @@ import { service } from "../../data/Servicios.js";
 import Hero from '../blocks/Hero.jsx';
 import Container from './Container.jsx';
 
+const TEXTO_ROJO_CLASS = "font-semibold text-rojo";
+const ITEM_TEXTO_CLASS = "text-[13px] md:text-xl";
+const ITEM_CLASS = "flex items-baseline gap-2";
+
+const textoConPrefijoRojo = (texto) => {
+  const textoPlano = String(texto);
+  const match = textoPlano.match(/^(\s*)(\d+\.|[^\p{L}\s])/u);
+  const tieneDosPuntos = textoPlano.includes(":");
+
+  if (!match) {
+    return tieneDosPuntos
+      ? <span className={TEXTO_ROJO_CLASS}>{textoPlano}</span>
+      : textoPlano;
+  }
+
+  const [, espacios, prefijo] = match;
+  const resto = textoPlano.slice(espacios.length + prefijo.length);
+
+  if (prefijo === "*") {
+    return tieneDosPuntos
+      ? <span className={TEXTO_ROJO_CLASS}>{textoPlano}</span>
+      : textoPlano;
+  }
+
+  return (
+    <>
+      {espacios}
+      <span className={TEXTO_ROJO_CLASS}>{prefijo}</span>
+      {resto}
+    </>
+  );
+};
+
+const RequisitoItem = ({ texto }) => (
+  <li className={ITEM_CLASS}>
+    <p className={ITEM_TEXTO_CLASS}>
+      {textoConPrefijoRojo(texto)}
+    </p>
+  </li>
+);
+
 const ServicioDetalle = () => {
   const { slug } = useParams();
   const data = service.find(item => item.slug === slug);
   const [abierto, setAbierto] = useState(null);
   const tituloClassName = "font-[Choplin] font-medium text-[24px] smd:text-[40px] md:text-[60px] lg:text-[75px] leading-tight mb-3 sm:mb-5 md:mb-8 max-w-[1200px] px-4 text-center text-balance";
-  const limpiarVineta = (texto) => texto.replace(/^\s*(?:•|â€¢|\*)\s*/, "");
 
   if (!data) return <h1 className="py-16 text-center text-2xl font-semibold">Servicio no encontrado</h1>;
 
@@ -36,13 +76,7 @@ const ServicioDetalle = () => {
             
             <div className='flex flex-col gap-3 md:gap-6'>
               {data.requisitos.map((item, i) => (
-                <li key={i} className="flex items-baseline gap-2">
-                  <span className="text-rojo text-[13px] md:text-xl leading-normal">•</span>
-
-                  <p className="text-[13px] md:text-xl">
-                    {limpiarVineta(item)}
-                  </p>
-                </li>
+                <RequisitoItem key={i} texto={item} />
               ))}
 
             </div> 
@@ -64,12 +98,7 @@ const ServicioDetalle = () => {
                   </div>
                   <div className={`overflow-hidden transition-all duration-300 px-6 flex flex-col gap-3 md:gap-6  ${ abierto === i ? " opacity-100 my-4 md:my-7"  : "max-h-0 opacity-0" }`} >
                       {item.items.map((requisito, index) => (
-                        <li key={index} className="flex items-baseline gap-2">
-                          <span className="text-rojo text-[13px] md:text-xl leading-normal">•</span>
-                          <p className="text-[13px] md:text-xl">
-                            {limpiarVineta(requisito)}
-                          </p>
-                        </li>
+                        <RequisitoItem key={index} texto={requisito} />
                       ))}
                   </div>
                 </div>

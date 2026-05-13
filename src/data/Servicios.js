@@ -144,7 +144,7 @@ export const service = [
       {
         titulo: "Apertura de Libros (Actas, matrícula de acciones, contables, padrón de asociados)",
         items: [
-          "Primer libro",
+          "Primer libro:",
           "• Presencia con documento de identidad del Gerente General o Presidente del Consejo Directivo",
           "• Vigencia de poder que será verificada por la notaría.",
           "• Vigencia de poder (no mayor a 05 días).",
@@ -565,7 +565,7 @@ export const service = [
           "• Declaración jurada de dos testigos mayores de edad que conozcan a la persona adulta mayor y den fe de la imposibilidad que tiene de manifestar su voluntad",
           "• Declaración jurada de la persona que va a ser apoyo de no tener antecedentes penales y judiciales",
           "• Declaración jurada de persona designada como apoyo de no ser deudor alimentario",
-          "Documento que acredite condición de apoyo",
+          "Documento que acredite condición de apoyo:",
           "• En caso sea cónyuge: Partida de Matrimonio",
           "• En caso sea hijo: Partida de Nacimiento",
           "• En caso sea hermano: Partida de Nacimiento de ambos",
@@ -586,11 +586,11 @@ export const service = [
       {
         titulo: "Hipoteca y levantamiento de hipoteca",         
           items: [
-              "Hipoteca",
+              "Hipoteca:",
               "• Documento de identidad de otorgantes.",
               "• Copia literal del inmueble.",
               "• Minuta autorizada por abogado.",
-              "Levantamiento de hipoteca",
+              "Levantamiento de hipoteca:",
               "• Minuta autorizada por abogado y firmada por acreedor.",
               "• Copia literal del inmueble."
           ],
