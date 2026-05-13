@@ -1,14 +1,17 @@
 import { useState, useEffect } from "react"
-import { useLocation } from "react-router-dom"
 import LogoSvg from "../../assets/icons/Logo"
 
 export default function Ventana() {
   const [isOpen, setIsOpen] = useState(false)
-  const location = useLocation()
 
   useEffect(() => {
-    setIsOpen(true)
-  }, [location])
+    const hasSeenPopup = sessionStorage.getItem("ventana-popup-seen")
+
+    if (!hasSeenPopup) {
+      setIsOpen(true)
+      sessionStorage.setItem("ventana-popup-seen", "true")
+    }
+  }, [])
 
   const handleClose = () => setIsOpen(false)
 
