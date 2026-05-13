@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 const Constitucion = () => {
 
   const [abierto, setAbierto] = useState(null);
-  const { slug } = useParams();
+  const { slug = "constitucion" } = useParams();
   const servicio = service.find(s => s.slug === slug); 
 
   return (
@@ -27,11 +27,12 @@ const Constitucion = () => {
           </div>
         </Hero>
 
-        <div className='w-full pt-10 md:pt-18'> 
-          <Container><h2 className='title text-center text-black leading-7 md:leading-12 mb-7 '>Requisitos</h2></Container>
-        </div>
+        <div className='flex flex-col gap-7 md:gap-12 py-10 md:py-20'>
+          <div className='w-full'> 
+            <Container><h2 className='title text-center text-black leading-7 md:leading-12'>Requisitos</h2></Container>
+          </div>
 
-        <div className='w-full pt-0 md:pt-10 pb-10'>  
+          <div className='w-full'>  
           <Container>
             <div className="w-full flex flex-col gap-0 sm:gap-1">
                {servicio.secciones?.map((item, i) => (
@@ -47,7 +48,7 @@ const Constitucion = () => {
                   <div className={`overflow-hidden transition-all duration-300 px-6 flex flex-col gap-3 md:gap-6  ${ abierto === i ? " opacity-100 my-4 md:my-7"  : "max-h-0 opacity-0" }`} >
                       {item.items?.map((req, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <p className={`text-[13px] md:text-xl ${req.includes("Pérdida") || req.includes("Primer") || req.includes("Si se desea") ? "text-rojo" : ""}`}>
+                          <p className={`text-[13px] md:text-xl ${req.includes("Pérdida") || req.includes("Primer") || req.includes("Si se desea") ? "font-semibold text-rojo" : ""}`}>
                             {req.includes("Perdida") || req.includes("Primer") ? (
                               req
                             ) : (
@@ -63,6 +64,7 @@ const Constitucion = () => {
               ))}
             </div>
           </Container>
+          </div>
         </div> 
     </>
   )

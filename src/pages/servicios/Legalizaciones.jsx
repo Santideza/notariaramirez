@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 
 const Legalizaciones = () => {
   const [abierto, setAbierto] = useState(null);
-  const { slug } = useParams();
+  const { slug = "legalizaciones" } = useParams();
   const servicio = service.find(s => s.slug === slug); 
 
   return (
@@ -27,11 +27,12 @@ const Legalizaciones = () => {
           </div>
         </Hero>
 
-        <div className='w-full pt-10 md:pt-18'> 
-          <Container><h2 className='title text-center text-black leading-7 md:leading-12 mb-7 '>Requisitos</h2></Container>
-        </div>
+        <div className='flex flex-col gap-7 md:gap-12 py-10 md:py-20'>
+          <div className='w-full'> 
+            <Container><h2 className='title text-center text-black leading-7 md:leading-12'>Requisitos</h2></Container>
+          </div>
 
-        <div className='w-full pt-0 md:pt-10 pb-10'> 
+          <div className='w-full'> 
           <Container>
             <div className="w-full flex flex-col gap-0 sm:gap-1">
                {servicio.secciones?.map((item, i) => (
@@ -55,6 +56,7 @@ const Legalizaciones = () => {
               ))}
             </div>
           </Container>
+          </div>
         </div> 
     </>
   )

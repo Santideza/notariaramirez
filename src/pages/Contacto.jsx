@@ -46,11 +46,11 @@ const Contacto = () => {
             <div className='mt-5 md:mt-8'>
               <h3 className='text-rojo text-[12px] smd:text-[20px] lg:text-[30px] font-light flex gap-2 lg:gap-7'>
                 <img src={iconoLlamada} alt="icono llamada" className="w-3 md:w-[35px]" />
-                <WhatsAppLink number="5112226281">(01) 222-6281</WhatsAppLink>
+                <p>(01) 222-6281</p>
               </h3>
               <h3 className='text-rojo text-[12px] smd:text-[20px] lg:text-[30px] font-light flex gap-2 lg:gap-7'>
                 <img src={iconoLlamada} alt="icono llamada" className="w-3 md:w-[35px]" />
-                <WhatsAppLink number="5112565990">(01) 256-5990</WhatsAppLink>
+                <p>(01) 256-5990</p>
               </h3>
               <ul className='font-light text-[9px] smd:text-[18px] lg:text-[25px]'>
                 <li>Lunes a Viernes de 9:00 am a 6:00 pm</li>

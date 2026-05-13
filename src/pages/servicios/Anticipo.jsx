@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 
 const Anticipo = () => {
 
-  const { slug } = useParams();
+  const { slug = "anticipo" } = useParams();
   const servicio = service.find(s => s.slug === slug); 
 
   return (
@@ -26,25 +26,26 @@ const Anticipo = () => {
             </Container>
           </div>
         </Hero>
+        <div className='flex flex-col gap-7 md:gap-12 py-10 md:py-20'>
+          <div className='w-full '> 
+            <Container><h2 className='title text-center text-black leading-7 md:leading-12 '>Requisitos</h2></Container>
+          </div>
 
-        <div className='w-full pt-10 md:pt-18'> 
-          <Container><h2 className='title text-center text-black leading-7 md:leading-12 mb-7 '>Requisitos</h2></Container>
+          <div className='w-full '>  
+            <Container>
+              <div className='flex flex-col gap-3 md:gap-6'>
+                {servicio.requisitos?.map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <p className="text-[13px] md:text-xl">
+                      <span className="text-rojo">{item.split(" ")[0]}</span> {item.split(" ").slice(1).join(" ")}
+                    </p>
+                  </li>
+                ))}
+
+              </div> 
+            </Container>
+          </div> 
         </div>
-
-        <div className='w-full py-10 md:py-10'>  
-          <Container>
-            <div className='flex flex-col gap-3 md:gap-6'>
-              {servicio.requisitos?.map((item, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <p className="text-[13px] md:text-xl">
-                    <span className="text-rojo">{item.split(" ")[0]}</span> {item.split(" ").slice(1).join(" ")}
-                  </p>
-                </li>
-              ))}
-
-            </div> 
-          </Container>
-        </div> 
     </>
   )
 }
