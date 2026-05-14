@@ -29,7 +29,7 @@ const Nosotros = () => {
         <Container my='my-0'>
           <div className='gap-1 flex flex-col justify-center items-center '>
             <h2 className="text-center title">El Notario</h2>
-            <h3 className="font-[Choplin] font-semibold text-gris-oscuro text-[19px] md:text-[40px] text-center">Alejandro Ramirez Carranza</h3>
+            <h3 className="font-[Choplin] font-semibold text-gris-oscuro text-[19px] md:text-[40px] text-center">Alejandro Ramírez Carranza</h3>
             <p className='text-gris-oscuro font-regular text-[13px] md:text-[22px] leading-4 md:leading-6 text-center m-4'>Abogado por la Universidad Nacional de Trujillo, 
               Magíster en Derecho por la misma casa de estudios y Doctor en Derecho y Ciencias Políticas por la Universidad de San Martín de Porres. <br /><br /> Actualmente, es Notario de Lima 
               desde el año 1999, desarrollando una destacada trayectoria profesional en el ejercicio de la función notarial, con especial énfasis en materias de derecho civil y registral. 
