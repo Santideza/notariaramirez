@@ -9,10 +9,9 @@ const Nosotros = () => {
   return (
     <>
       <Hero image={imgFirma}>
-        <h1 className="font-[Choplin] font-light text-[21px] sm:text-3xl md:text-5xl lg:text-[62px] leading-5 smd:leading-none  mb-3 sm:mb-5 md:mb-8">
-          Nuestra razón <br />
-          de ser es su <span className="font-semibold">seguridad</span> <br />
-          y <span className="font-semibold">confianza</span>
+        <h1 className="font-[Choplin] font-light text-[25px] sm:text-4xl md:text-5xl lg:text-[62px] leading-6 smd:leading-none  mb-3 sm:mb-5 md:mb-8">
+          Nuestra finalidad <br />
+          es brindarle <span className="font-semibold"> <br /> seguridad</span>
         </h1>
       </Hero>
       <section className='py-6 md:py-25'>
@@ -29,7 +28,7 @@ const Nosotros = () => {
       <section className='bg-beige py-6 md:py-25'>
         <Container my='my-0'>
           <div className='gap-1 flex flex-col justify-center items-center '>
-            <h2 className="text-center title">EL NOTARIO</h2>
+            <h2 className="text-center title">El Notario</h2>
             <h3 className="font-[Choplin] font-semibold text-gris-oscuro text-[19px] md:text-[40px] text-center">Alejandro Ramirez Carranza</h3>
             <p className='text-gris-oscuro font-regular text-[13px] md:text-[22px] leading-4 md:leading-6 text-center m-4'>Abogado por la Universidad Nacional de Trujillo, 
               Magíster en Derecho por la misma casa de estudios y Doctor en Derecho y Ciencias Políticas por la Universidad de San Martín de Porres. <br /><br /> Actualmente, es Notario de Lima 
