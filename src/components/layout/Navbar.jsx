@@ -23,20 +23,20 @@ const Navbar = () => {
                 </button>
 
                 <div className="hidden lg:flex items-center gap-10">
-                     <Link  to="/nosotros"  className="relative block h-[24px] overflow-hidden text-white text-[16px] xl:text-[20px] font-light group hover:text-amarillo">
+                     <Link  to="/nosotros"  className="relative block h-[24px] overflow-hidden text-white text-[16px] xl:text-[18px] font-light group hover:text-amarillo">
                         <div className="transition-transform duration-300 group-hover:-translate-y-full"> La Notaría</div>
                         <div className="absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-full"> La Notaría </div>
                     </Link>
-                    <Link to="/servicios" className="relative block h-[24px] overflow-hidden text-white text-[16px] xl:text-[20px] font-light group hover:text-amarillo">
+                    <Link to="/servicios" className="relative block h-[24px] overflow-hidden text-white text-[16px] xl:text-[18px] font-light group hover:text-amarillo">
                         <div className="transition-transform duration-300 group-hover:-translate-y-full">Servicios</div>
                         <div className="absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-full">Servicios</div>
                     </Link>
-                    <Link to="/ubicanos" className="relative block h-[24px] overflow-hidden text-white text-[16px] xl:text-[20px]  font-light group hover:text-amarillo">
+                    <Link to="/ubicanos" className="relative block h-[24px] overflow-hidden text-white text-[16px] xl:text-[18px]  font-light group hover:text-amarillo">
                         <div className="transition-transform duration-300 group-hover:-translate-y-full">Ubícanos</div>
                         <div className="absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-full">Ubícanos</div>
                     </Link>
                     <Link to="/contacto">
-                        <Boton width='w-[120px] xl:w-[160px]' height='h-[32px] xl:h-[38px]' textSize='text-[16px] xl:text-[20px]' px='px-5 2xl:px-6' className='hover:bg-rojo hover:text-white hover:border-rojo ease-in-out'></Boton>
+                        <Boton width='w-[120px] xl:w-[160px]' height='h-[32px] xl:h-[38px]' textSize='text-[16px] xl:text-[18px]' px='px-5 2xl:px-6' className='hover:bg-rojo hover:text-white hover:border-rojo ease-in-out'></Boton>
                     </Link>
                 </div>
 
