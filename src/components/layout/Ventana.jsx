@@ -19,8 +19,8 @@ export default function Ventana() {
 
   return (
     <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-200 p-4">
-      <div className="bg-white rounded-4xl shadow-2xl max-w-[1000px] w-full min-h-[580px]overflow-y-auto max-sm:min-h-[520px] max-xs:min-h-[480px] ">
-        <div className="p-6 space-y-4 max-xs:p-3">
+      <div className="bg-white rounded-4xl shadow-2xl max-w-[1000px] w-full max-h-[calc(100vh-32px)] overflow-y-auto">
+        <div className="p-5 h-auto">
           <div className=" w-full h-[290px] rounded-t-4xl overflow-hidden relative max-sm:h-[240px] max-xs:h-[200px]">
 
             <div className="  w-[220px] h-[100px] bg-white rounded-b-4xl absolute top-0 left-1/2 -translate-x-1/2 flex items-center justify-center max-sm:w-[160px] max-sm:h-[70px]max-xs:w-[130px] max-xs:h-[55px]">
@@ -42,15 +42,14 @@ export default function Ventana() {
               title="Ubicación en Google Maps" />
           </div>
 
-          <div className="text-center lg:mx-10 sm:mx-4 xs:mx-2 ">
-            <span className=" font-semibold font-[choplin] text-rojo text-[45px] sm:text-[55px] lg:text-[80px] md:text-[70px]  leading-10  ">
+          <div className="text-center py-6 md:py-10 lg:mx-10 sm:mx-10 xs:mx-2">
+            <span className="block pb-4 font-semibold font-[choplin] text-rojo text-[45px] sm:text-[55px] md:text-[70px] lg:text-[80px] leading-10 sm:leading-15">
               ¡Nos mudamos!
             </span>
 
-            <p className="text-[20px] md:text-[26px] my-[12px]">
-              Nos trasladamos a <span className="font-bold"><br /> Av. César Vallejo 290 - Lince. </span>
-              <br className="sm:hidden" />
-               Ahora estamos en nueva oficina, nuevo espacio, mayor comodidad
+            <p className="text-[17px] md:text-[26px]">
+              Nos trasladamos a <span className="font-bold"><br />Av. César Vallejo 290 - Lince.<br /></span>
+              Ahora estamos en nueva oficina, nuevo espacio, mayor comodidad
               para nuestro equipo y un mejor servicio para nuestros clientes.
             </p>
           </div>
