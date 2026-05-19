@@ -1,6 +1,9 @@
 import { useState } from "react";
 import Boton from "../components/ui/Boton";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
+const SEND_EMAIL_ENDPOINT = `${API_BASE_URL}/send-email`;
+
 export default function LibroReclamaciones() {
   const [enviado, setEnviado] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -14,7 +17,7 @@ export default function LibroReclamaciones() {
     const data = Object.fromEntries(formData.entries())
 
     try {
-      const res = await fetch('http://localhost:3001/send-email', {
+      const res = await fetch(SEND_EMAIL_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
