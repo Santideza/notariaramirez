@@ -152,26 +152,23 @@ export default function LibroReclamaciones() {
           </form>
 
           {enviado && (
-            <div className="fixed left-0 right-0 top-5 z-50 flex justify-center px-4">
-              <div className="relative flex w-full max-w-md items-center gap-3 rounded-xl border border-green-200 bg-white px-5 py-4 pr-12 shadow-2xl">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-green-100 text-lg font-bold text-green-700">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/35 px-4">
+              <div className="w-full max-w-sm rounded-2xl border border-green-100 bg-white p-6 text-center shadow-2xl">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-2xl font-bold text-green-700">
                   ✓
                 </div>
-                <div className="text-left">
-                  <p className="text-base font-semibold text-gray-900">
-                    Correo enviado
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Tu reclamo fue enviado correctamente.
-                  </p>
-                </div>
+                <h2 className="mb-2 text-xl font-bold text-gray-900">
+                  Enviado correctamente
+                </h2>
+                <p className="mb-5 text-sm leading-6 text-gray-600">
+                  Hemos recibido tu registro. Gracias por comunicarte con la Notaría Ramírez.
+                </p>
                 <button
                   type="button"
                   onClick={() => setEnviado(false)}
-                  aria-label="Cerrar mensaje"
-                  className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition hover:bg-gray-100 hover:text-gray-700"
+                  className="w-full rounded-xl bg-rojo px-5 py-3 text-sm font-semibold text-white transition hover:bg-red-800"
                 >
-                  x
+                  Entendido
                 </button>
               </div>
             </div>
