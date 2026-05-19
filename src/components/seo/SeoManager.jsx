@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { service } from "../../data/Servicios";
 
-const SITE_URL = "https://santiago290.github.io/notariaramirez";
+const SITE_URL = "https://www.notariaramirez.com.pe";
 
 const homeSeo = {
   title: "Notaría Ramírez en Lince | Servicios notariales en Lima",
@@ -147,6 +147,29 @@ const seoByPath = {
       },
     },
   },
+  "/libro-reclamaciones": {
+    title: "Libro de Reclamaciones | Notaría Ramírez en Lince",
+    description:
+      "Registra reclamos o quejas en el Libro de Reclamaciones de la Notaría Alejandro Ramírez Carranza, ubicada en Lince, Lima.",
+    canonical: `${SITE_URL}/libro-reclamaciones`,
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: "Libro de Reclamaciones de la Notaría Alejandro Ramírez Carranza",
+      url: `${SITE_URL}/libro-reclamaciones`,
+      about: {
+        "@type": "LegalService",
+        name: "Notaría Alejandro Ramírez Carranza",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Av. César Vallejo 290",
+          addressLocality: "Lince",
+          addressRegion: "Lima",
+          addressCountry: "PE",
+        },
+      },
+    },
+  },
 };
 
 const getServiceSeo = (pathname) => {
@@ -240,6 +263,18 @@ const SeoManager = () => {
     upsertMeta('meta[property="og:url"]', {
       property: "og:url",
       content: seo.canonical,
+    });
+    upsertMeta('meta[name="twitter:card"]', {
+      name: "twitter:card",
+      content: "summary",
+    });
+    upsertMeta('meta[name="twitter:title"]', {
+      name: "twitter:title",
+      content: seo.title,
+    });
+    upsertMeta('meta[name="twitter:description"]', {
+      name: "twitter:description",
+      content: seo.description,
     });
     upsertCanonical(seo.canonical);
     upsertSchema(seo.schema);
