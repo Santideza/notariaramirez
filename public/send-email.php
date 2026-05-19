@@ -26,11 +26,22 @@ if (!is_array($data)) {
     json_response(400, ['message' => 'Solicitud invalida']);
 }
 
-// Mantener igual que el backend Node con Resend.
-// En cPanel puedes crear resend-config.php fuera de public_html con:
-// <?php return ['RESEND_API_KEY' => 're_xxxxxxxxx'];
+// En cPanel crea /home/TU_USUARIO_CPANEL/resend-config.php fuera de public_html:
+// <?php
+// return ['RESEND_API_KEY' => 're_xxxxxxxxx'];
 $privateConfigPath = dirname(__DIR__) . '/resend-config.php';
-$privateConfig = is_file($privateConfigPath) ? require $privateConfigPath : [];
+$privateConfig = [];
+
+if (is_file($privateConfigPath)) {
+    ob_start();
+    $loadedConfig = require $privateConfigPath;
+    ob_end_clean();
+
+    if (is_array($loadedConfig)) {
+        $privateConfig = $loadedConfig;
+    }
+}
+
 $resendApiKey = getenv('RESEND_API_KEY') ?: ($privateConfig['RESEND_API_KEY'] ?? '');
 $to = 'administra@notariaramirez.com.pe';
 $from = 'administra@notariaramirez.com.pe';
@@ -44,10 +55,6 @@ if ($resendApiKey === '') {
 if (!function_exists('curl_init')) {
     error_log('La extension cURL de PHP no esta habilitada.');
     json_response(500, ['message' => 'No se pudo enviar el correo']);
-}
-
-if (clean_text($data, 'website') !== '') {
-    json_response(200, ['message' => 'Correo enviado correctamente']);
 }
 
 function clean_text(array $data, string $key): string
@@ -75,6 +82,10 @@ function render_field(string $label, string $value): string
             <td style=\"padding:10px 0;color:#212121;font-size:14px;font-weight:600;vertical-align:top;\">{$safeValue}</td>
         </tr>
     ";
+}
+
+if (clean_text($data, 'website') !== '') {
+    json_response(200, ['message' => 'Correo enviado correctamente']);
 }
 
 $nombres = clean_text($data, 'nombres');
