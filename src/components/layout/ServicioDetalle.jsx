@@ -55,7 +55,7 @@ const ServicioDetalle = () => {
 
   return (
     <>
-      <Hero image={data.imagen}>
+      <Hero image={data.imagen} imageAlt={`Servicio notarial de ${data.titulo} en la Notaría Alejandro Ramírez Carranza`}>
         <div className='flex flex-col items-center gap-4 smd:gap-7 md:gap-14'>
           <img src={data.icono} alt={data.titulo} className="w-[72px] h-[56px] md:w-[123px] md:h-[96px] object-contain"/>
           <h1 className={tituloClassName}>
@@ -91,7 +91,7 @@ const ServicioDetalle = () => {
               {data.secciones.map((item, i) => (
                 <div key={i} className="mb-3">
                   <div onClick={() => setAbierto(abierto === i ? null : i)} className="bg-gris-muy-claro flex justify-between items-center gap-3 px-6 py-2 rounded-[20px] xl:rounded-full cursor-pointer font-bold text-sm md:text-xl">
-                    <span className="min-w-0 leading-tight break-words">{item.titulo}</span>
+                    <h3 className="min-w-0 leading-tight break-words">{item.titulo}</h3>
                     <span className={`transition-transform duration-300 text-sm text-rojo ${ abierto === i ? "rotate-180" : ""}`}>
                       ▼
                     </span>

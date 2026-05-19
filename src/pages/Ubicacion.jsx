@@ -8,12 +8,12 @@ const Ubicacion = () => {
     <>
       <div className="block md:hidden">
         <Hero image={imgUbicacion} imageAlt="Ubicación de la Notaría Alejandro Ramírez Carranza en Lince">
-          <h2 className="font-[Choplin] font-light text-[21px] sm:text-3xl md:text-5xl lg:text-[62px] leading-5 smd:leading-6 smd:leading-none  mb-3 sm:mb-5 md:mb-8">
+          <div className="font-[Choplin] font-light text-[21px] sm:text-3xl md:text-5xl lg:text-[62px] leading-5 smd:leading-6 smd:leading-none  mb-3 sm:mb-5 md:mb-8">
             <span className="font-semibold">Visítanos</span> en nuestras<br />
             oficinas para brindarte <br />
             una <span className="font-semibold">atencion directa</span> y <br />
             <span className="font-semibold">confiable</span>
-          </h2>
+          </div>
         </Hero>
       </div>
 
@@ -26,6 +26,7 @@ const Ubicacion = () => {
 
       <div className="flex justify-center">
           <iframe
+            title="Mapa de ubicación de la Notaría Alejandro Ramírez Carranza"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.3445232410954!2d-77.04053631549353!3d-12.088550312112655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c85e52b5fd5d%3A0x785d4b2405f696d8!2sAv.%20C%C3%A9sar%20Vallejo%20290%2C%20Lima%2015073!5e0!3m2!1ses-419!2spe!4v1764196264547!5m2!1ses-419!2spe"
             className=" w-full h-[435px] md:h-[1339px]"
             allowFullScreen

@@ -12,7 +12,7 @@ const Anticipo = () => {
 
   return (
     <>
-        <Hero image={servicio.imagen}>
+        <Hero image={servicio.imagen} imageAlt={`Servicio notarial de ${servicio.titulo} en la Notaría Alejandro Ramírez Carranza`}>
           <div className='flex flex-col items-center gap-4 smd:gap-7 md:gap-14'>
             <img 
               src={servicio.icono} 

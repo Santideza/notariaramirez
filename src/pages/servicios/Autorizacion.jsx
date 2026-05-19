@@ -12,7 +12,7 @@ const Autorizacion = () => {
 
   return (
     <>
-        <Hero image={servicio.imagen}>
+        <Hero image={servicio.imagen} imageAlt={`Servicio notarial de ${servicio.titulo} en la Notaría Alejandro Ramírez Carranza`}>
           <div className='flex flex-col items-center gap-4 smd:gap-7 md:gap-14'>
             <img 
               src={servicio.icono} 
@@ -38,7 +38,7 @@ const Autorizacion = () => {
                {servicio.secciones?.map((item, i) => (
                 <div key={i} className="mb-3">
                   <div onClick={() => setAbierto(abierto === i ? null : i)} className="bg-gris-muy-claro flex justify-between items-center px-6 py-2 rounded-[20px] xl:rounded-full cursor-pointer font-bold text-sm md:text-xl">
-                    {item.titulo}
+                    <h3 className="min-w-0 leading-tight break-words">{item.titulo}</h3>
                     <span className={`transition-transform duration-300 text-sm text-rojo ${ abierto === i ? "rotate-180" : ""}`}>
                       ▼
                     </span>

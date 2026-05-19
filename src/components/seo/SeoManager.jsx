@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { service } from "../../data/Servicios";
 
 const SITE_URL = "https://santiago290.github.io/notariaramirez";
 
@@ -148,6 +149,42 @@ const seoByPath = {
   },
 };
 
+const getServiceSeo = (pathname) => {
+  const match = pathname.match(/^\/servicios\/([^/]+)$/);
+  if (!match) return null;
+
+  const currentService = service.find((item) => item.slug === match[1]);
+  if (!currentService) return null;
+
+  const title = `${currentService.titulo} | Notaría Ramírez en Lince`;
+  const description = `Conoce los requisitos del servicio notarial de ${currentService.titulo} en la Notaría Alejandro Ramírez Carranza, ubicada en Lince, Lima.`;
+  const canonical = `${SITE_URL}/servicios/${currentService.slug}`;
+
+  return {
+    title,
+    description,
+    canonical,
+    schema: {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: currentService.titulo,
+      url: canonical,
+      provider: {
+        "@type": "LegalService",
+        name: "Notaría Alejandro Ramírez Carranza",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Av. César Vallejo 290",
+          addressLocality: "Lince",
+          addressRegion: "Lima",
+          addressCountry: "PE",
+        },
+      },
+      areaServed: "Lima, Perú",
+    },
+  };
+};
+
 const upsertMeta = (selector, attributes) => {
   let element = document.head.querySelector(selector);
   if (!element) {
@@ -185,7 +222,7 @@ const SeoManager = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const seo = seoByPath[pathname] ?? homeSeo;
+    const seo = getServiceSeo(pathname) ?? seoByPath[pathname] ?? homeSeo;
 
     document.title = seo.title;
     upsertMeta('meta[name="description"]', {

@@ -13,9 +13,9 @@ const Services = () => {
   return (
     <Container my='my-[50px]' w='w-[320px] smd:w-[500px] lg:w-[900px] xl:w-[1150px] mx-auto'>
         <div className="mb-9 md:mb-18 text-center">
-          <div className="title text-[23px] md:text-4xl leading-none">
+          <h2 className="title text-[23px] md:text-4xl leading-none">
             ¿Qué trámites deseas realizar hoy?
-           </div>
+           </h2>
         </div>
         <div className="flex flex-col gap-6">
           <div className="flex flex-wrap justify-center gap-2 smd:gap-4">
