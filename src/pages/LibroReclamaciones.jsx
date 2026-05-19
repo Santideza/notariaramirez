@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Boton from "../components/ui/Boton";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
-const SEND_EMAIL_ENDPOINT = `${API_BASE_URL}/send-email`;
+const SEND_EMAIL_ENDPOINT =
+  import.meta.env.VITE_SEND_EMAIL_ENDPOINT ?? "/send-email.php";
 
 export default function LibroReclamaciones() {
   const [enviado, setEnviado] = useState(false)
@@ -25,18 +25,18 @@ export default function LibroReclamaciones() {
         body: JSON.stringify(data)
       })
 
-      if (!res.ok) {
-        throw new Error('Error en el servidor')
-      }
+      const result = await res.json()
 
-      await res.json()
+      if (!res.ok) {
+        throw new Error(result.message || 'Error en el servidor')
+      }
 
       setEnviado(true)
       e.target.reset()
 
     } catch (error) {
       console.error(error)
-      alert('Error al enviar ❌')
+      alert(error.message || 'Error al enviar')
     } finally {
       setLoading(false)
     }
@@ -129,6 +129,15 @@ export default function LibroReclamaciones() {
                 Acepto el tratamiento de mis datos personales
               </label>
             </div>
+
+            <input
+              type="text"
+              name="website"
+              tabIndex="-1"
+              autoComplete="off"
+              aria-hidden="true"
+              className="hidden"
+            />
 
             <Boton
               type="submit"
