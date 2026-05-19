@@ -1,10 +1,6 @@
-import React from 'react'
 import Logo from "../../assets/icons/Logo"
 import { Link } from 'react-router-dom'
-import whatsapp from "../../assets/icons/Whatsapp.svg"
 import Container from './Container'
-import Whastapp from '../../assets/icons/Whastapp'
-import Whatsapp from '../../assets/icons/Whastapp'
 
 const Footer = () => {
   return (
