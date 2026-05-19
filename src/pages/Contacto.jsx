@@ -23,7 +23,7 @@ const Contacto = () => {
   return (
     <>
       <div className="block md:hidden">
-        <Hero image={imgContacto}>
+        <Hero image={imgContacto} imageAlt="Contacto de la Notaría Alejandro Ramírez Carranza en Lince">
           <h2 className="font-[Choplin] font-light text-[21px] sm:text-4xl  leading-5 sm:leading-7 smd:leading-none  mb-3 sm:mb-5 md:mb-8">
             Estamos aqui para <br /> ayudarte a resolver tus <br />
             <span className="font-semibold">consultas y tramites <br /> notariales</span>

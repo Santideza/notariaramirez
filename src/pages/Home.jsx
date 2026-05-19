@@ -10,7 +10,7 @@ import { Link } from 'react-router'
 const Home = () => {
   return (
     <>
-      <Hero image={imgNotaria}>
+      <Hero image={imgNotaria} imageAlt="Notaría Alejandro Ramírez Carranza en Lince">
         <h1 className="font-[Choplin] font-light text-[25px] sm:text-4xl md:text-5xl lg:text-[62px] leading-6 smd:leading-none  mb-3 sm:mb-5 md:mb-8">
           Nuestra finalidad <br />
           es brindarle <span className="font-semibold"> <br /> seguridad</span>

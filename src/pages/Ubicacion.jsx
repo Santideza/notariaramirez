@@ -7,7 +7,7 @@ const Ubicacion = () => {
   return (
     <>
       <div className="block md:hidden">
-        <Hero image={imgUbicacion}>
+        <Hero image={imgUbicacion} imageAlt="Ubicación de la Notaría Alejandro Ramírez Carranza en Lince">
           <h2 className="font-[Choplin] font-light text-[21px] sm:text-3xl md:text-5xl lg:text-[62px] leading-5 smd:leading-6 smd:leading-none  mb-3 sm:mb-5 md:mb-8">
             <span className="font-semibold">Visítanos</span> en nuestras<br />
             oficinas para brindarte <br />

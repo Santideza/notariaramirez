@@ -23,10 +23,12 @@ import Rectificacion from "./pages/servicios/Rectificacion"
 import Sucesion from "./pages/servicios/Sucesion"
 import Testamento from "./pages/servicios/Testamento"
 import Vehicular from "./pages/servicios/Vehicular"
+import SeoManager from "./components/seo/SeoManager"
 
 function App() {
   return (
     <>
+      <SeoManager />
       <Scroll />
       <MainLayout>
         <Routes>

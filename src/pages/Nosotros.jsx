@@ -8,7 +8,7 @@ import iconoVision from "../assets/icons/vision.svg"
 const Nosotros = () => {
   return (
     <>
-      <Hero image={imgFirma}>
+      <Hero image={imgFirma} imageAlt="Firma notarial en la Notaría Alejandro Ramírez Carranza">
         <h1 className="font-[Choplin] font-light text-[25px] sm:text-4xl md:text-5xl lg:text-[62px] leading-6 smd:leading-none  mb-3 sm:mb-5 md:mb-8">
           Nuestra finalidad <br />
           es brindarle <span className="font-semibold"> <br /> seguridad</span>

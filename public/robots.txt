@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://santiago290.github.io/notariaramirez/sitemap.xml
